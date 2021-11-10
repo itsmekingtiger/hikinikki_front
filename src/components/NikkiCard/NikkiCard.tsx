@@ -8,14 +8,16 @@ export interface NikkiCardProps {
 function NikkiCard(nikki: Nikki) {
     return (
         // apply card design
-        <div className="p-6 m-6 max-w-sm mx-auto bg-white rounded-xl shadow-md items-center space-x-4">
+        <div className="p-3 m-6 max-w-sm mx-auto bg-white rounded-xl border-2 border-black space-x-4">
             {/* content div, show text */}
             <div>
-                {nikki.content}
+                <code>
+                    {nikki.content}
+                </code>
             </div>
 
             {/* bottom line, include created date */}
-            <div>
+            <div className="text-right text-sm text-gray-400">
                 {nikki.createdAt}
             </div>
 

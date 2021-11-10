@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import BodySection from './components/BodySection';
 import Header from './components/Header';
 
