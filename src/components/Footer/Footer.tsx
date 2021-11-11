@@ -18,13 +18,12 @@ function Footer({ currentPage, totalPage, onPageChanged: onPageChanged }: Footer
         let com: Array<JSX.Element> = [];
 
         for (let i = start; i < end; i++) {
+            const color = i === currentPage ? "indigo" : "gray";
+            const style = `border-${color}-300 text-${color}-500 hover:bg-${color}-100 relative inline-flex items-center px-4 py-2 border text-sm font-medium`;
+
             com = com.concat(
                 <button
-                    className={
-                        i === currentPage
-                            ? "bg-white border-indigo-300 text-indigo-500 hover:bg-indigo-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                            : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                    }
+                    className={style}
                     onClick={(e) => onPageChanged(i)}
                 >
                     {i + 1}
@@ -35,12 +34,10 @@ function Footer({ currentPage, totalPage, onPageChanged: onPageChanged }: Footer
     }
 
     return (
-        <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                    {evalRange()}
-                </nav>
-            </div>
+        <div className="px-4 py-3 flex justify-center">
+            <nav className="shadow-sm -space-x-px" aria-label="Pagination">
+                {evalRange()}
+            </nav>
         </div>
     );
 }
