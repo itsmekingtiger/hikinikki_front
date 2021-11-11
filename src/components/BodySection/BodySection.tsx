@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import client from '../../api/nikki_api';
-import { Nikki, NikkiPageData } from '../../models/nikki';
+import React from 'react';
+import { Nikki } from '../../models/nikki';
 import NikkiCard from '../NikkiCard/NikkiCard';
 // import './BodySection.css';
 
