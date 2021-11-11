@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer base {
+  kbd {
+    @apply bg-gray-100;
+    @apply rounded-sm;
+    @apply p-1;
+  }
+}
