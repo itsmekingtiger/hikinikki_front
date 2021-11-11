@@ -37,10 +37,26 @@ export default function WriteNikkiModal({ open }: WriteNikkiModalProps) {
     const backgroundStyle = `${display} fixed z-1 left-0 top-0 w-full h-full overflow-auto flex`
     const contentStyle = `m-3 m-auto bg-pink-200 w-1/2 border-black border-2`
 
+    const btnStyle = `
+    relative inline-flex items-center px-4 py-2
+    border border-gray-400
+    bg-gray-50 hover:bg-gray-200
+    text-gray-500 text-sm font-medium`;
+
     return (
         <div className={backgroundStyle}>
             <div className={contentStyle}>
-                hello world
+
+                <p>Add new Nikki</p>
+
+                <div className="justify-center flex">
+                    <textarea className="w-4/5" />
+                </div>
+
+                <div className="justify-center flex">
+                    <button className={btnStyle}>ADD</button>
+                    <button className={btnStyle}>CLOSE</button>
+                </div>
             </div>
         </div>
     );
