@@ -1,9 +1,10 @@
-import { queries } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import client from './api/nikki_api';
 import BodySection from './components/BodySection';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import WriteNikkiModal from './components/WriteNikkiModal/WriteNikkiModal';
 import { Nikki, NikkiPageData } from './models/nikki';
 
 function App() {
@@ -24,7 +25,6 @@ function App() {
     []
   );
 
-
   async function onPageChanged(page: number) {
     const resp = await client.get<NikkiPageData>(
       "/api/nikki/recent",
@@ -38,6 +38,16 @@ function App() {
     }
   }
 
+  const [showModal, setShowMoal] = useState(false);
+  useHotkeys(
+    'alt+n',
+    () => {
+      console.log("단축키 눌림");
+
+      setShowMoal(true);
+    },
+  );
+
   return (
     <div className="App">
       <Header title="Hiki Nikki" />
@@ -45,6 +55,8 @@ function App() {
       <BodySection nikkis={nikkis} />
 
       <Footer currentPage={pageInfo.current} totalPage={pageInfo.total} onPageChanged={onPageChanged} />
+
+      <WriteNikkiModal open={showModal} />
     </div>
   );
 }
