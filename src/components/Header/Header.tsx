@@ -1,13 +1,11 @@
 import React from 'react';
-// import './Header.css';
-
 export interface HeaderProps {
     title: string
 }
 
 function Header({ title }: HeaderProps) {
     return (
-        <header className="App-header">
+        <header className="m-6">
             <h1 className="text-3xl text-center font-serif">{title}</h1>
         </header>
     );
