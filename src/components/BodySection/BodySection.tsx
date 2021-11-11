@@ -10,7 +10,7 @@ export interface BodySectionProps {
 
 function BodySection({ nikkis }: BodySectionProps) {
 
-    const drawNikkiVeiw = (nikkis: Array<Nikki>) => nikkis.map(nikki => NikkiCard(nikki));
+    const drawNikkiVeiw = (nikkis: Array<Nikki>) => nikkis.map(nikki => <NikkiCard nikki={nikki} key={nikki.id} />);
 
 
     return (

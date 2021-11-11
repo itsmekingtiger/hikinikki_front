@@ -2,10 +2,10 @@ import React from 'react';
 import { Nikki } from '../../models/nikki';
 
 export interface NikkiCardProps {
-    title: string
+    nikki: Nikki
 }
 
-function NikkiCard(nikki: Nikki) {
+function NikkiCard({ nikki }: NikkiCardProps) {
     return (
         // apply card design
         <div className="p-3 m-6 max-w-sm mx-auto bg-white rounded-xl border-2 border-black space-x-4">

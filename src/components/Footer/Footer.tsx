@@ -22,6 +22,7 @@ function Footer({ currentPage, totalPage, onPageChanged }: FooterProps) {
                 <button
                     className={style}
                     onClick={(_) => onPageChanged(i)}
+                    key={i}
                 >
                     {i + 1}
                 </button>
