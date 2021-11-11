@@ -5,26 +5,11 @@ import NikkiCard from '../NikkiCard/NikkiCard';
 // import './BodySection.css';
 
 export interface BodySectionProps {
-    title: string
+    nikkis: Array<Nikki>
 }
 
 
-function BodySection() {
-
-
-    const [nikkis, setNikkis] = useState<Array<Nikki>>([])
-    const [pageInfo, setPageInfo] = useState<{ current: number, total: number }>({ current: 0, total: 0 });
-
-    useEffect(
-        () => {
-            client.get<NikkiPageData>("/api/nikki/recent").then(
-                resp => {
-                    setNikkis(resp.data.nikkis);
-                }
-            );
-        },
-        []
-    );
+function BodySection({ nikkis }: BodySectionProps) {
 
     const drawNikkiVeiw = (nikkis: Array<Nikki>) => nikkis.map(nikki => NikkiCard(nikki));
 
