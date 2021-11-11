@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { MutableRefObject, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import client from '../../api/nikki_api';
 
 export type WriteNikkiModalProps = {
     isOpen: boolean,
     closeModal: Function,
-    focusRef: any,
+    focusRef: MutableRefObject<any>,
 }
 
 // Modal with pure css
@@ -48,9 +48,18 @@ export default function WriteNikkiModal({ isOpen, closeModal, focusRef }: WriteN
     text-gray-500 text-sm font-medium select-none`;
 
     const [text, setText] = useState("");
-    const saveNikki = () => client.post("/api/nikki", { "content": text });
+
+    async function saveNikki() {
+        if (document.activeElement === focusRef.current && text)
+            client.post("/api/nikki", { "content": text });
+    }
 
     useHotkeys('esc', () => { setText(""); closeModal() });
+    useHotkeys(
+        'alt+enter',
+        () => { saveNikki().then(() => { setText(""); closeModal(); }) },
+        { enableOnTags: ["TEXTAREA"], }
+    );
 
 
     return (
