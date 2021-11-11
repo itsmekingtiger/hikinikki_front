@@ -2,6 +2,7 @@ import React from 'react';
 
 export type WriteNikkiModalProps = {
     open: boolean,
+    onClose: Function,
 }
 
 // Modal with pure css
@@ -30,7 +31,7 @@ export type WriteNikkiModalProps = {
 // }
 // ```
 
-export default function WriteNikkiModal({ open }: WriteNikkiModalProps) {
+export default function WriteNikkiModal({ open, onClose }: WriteNikkiModalProps) {
 
     const display = open ? "block" : "hidden";
 
@@ -55,7 +56,7 @@ export default function WriteNikkiModal({ open }: WriteNikkiModalProps) {
 
                 <div className="justify-center flex">
                     <button className={btnStyle}>ADD</button>
-                    <button className={btnStyle}>CLOSE</button>
+                    <button className={btnStyle} onClick={(_) => onClose()}>CLOSE</button>
                 </div>
             </div>
         </div>

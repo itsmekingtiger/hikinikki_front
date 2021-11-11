@@ -39,14 +39,8 @@ function App() {
   }
 
   const [showModal, setShowMoal] = useState(false);
-  useHotkeys(
-    'alt+n',
-    () => {
-      console.log("단축키 눌림");
-
-      setShowMoal(true);
-    },
-  );
+  useHotkeys('alt+n', () => setShowMoal(true));
+  const onClose = () => setShowMoal(false)
 
   return (
     <div className="App">
@@ -56,7 +50,7 @@ function App() {
 
       <Footer currentPage={pageInfo.current} totalPage={pageInfo.total} onPageChanged={onPageChanged} />
 
-      <WriteNikkiModal open={showModal} />
+      <WriteNikkiModal open={showModal} onClose={onClose} />
     </div>
   );
 }
