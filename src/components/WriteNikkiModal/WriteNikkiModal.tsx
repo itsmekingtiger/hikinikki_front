@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import client from '../../api/nikki_api';
 
 export type WriteNikkiModalProps = {
@@ -47,6 +48,8 @@ export default function WriteNikkiModal({ isOpen, closeModal }: WriteNikkiModalP
 
     const [text, setText] = useState("");
     const saveNikki = () => client.post("/api/nikki", { "content": text });
+
+    useHotkeys('esc', () => { setText(""); closeModal() });
 
 
     return (
