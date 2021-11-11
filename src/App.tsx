@@ -9,7 +9,7 @@ import { Nikki, NikkiPageData } from './models/nikki';
 
 function App() {
 
-  const [nikkis, setNikkis] = useState<Array<Nikki>>([])
+  const [nikkis, setNikkis] = useState<Array<Nikki>>([]);
   const [pageInfo, setPageInfo] = useState<{ current: number, total: number }>({ current: 0, total: 0 });
 
   useEffect(
@@ -40,7 +40,7 @@ function App() {
 
   const [isModalOpen, setShowMoal] = useState(false);
   useHotkeys('alt+n', () => setShowMoal(true));
-  const closeModal = () => setShowMoal(false)
+  const closeModal = () => setShowMoal(false);
 
   return (
     <div className="App">
