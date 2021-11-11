@@ -4,3 +4,9 @@ export type Nikki = {
     content: string,
     createdAt: any,
 }
+
+export interface NikkiPageData {
+    nikkis: Array<Nikki>,
+    totalPage: number,
+    currentPage: number,
+}
