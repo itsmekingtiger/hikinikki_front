@@ -14,9 +14,9 @@ function BodySection({ nikkis }: BodySectionProps) {
 
 
     return (
-        <li>
+        <div>
             {drawNikkiVeiw(nikkis)}
-        </li>
+        </div>
     );
 }
 
