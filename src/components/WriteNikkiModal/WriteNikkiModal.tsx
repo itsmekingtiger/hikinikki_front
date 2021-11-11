@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import client from '../../api/nikki_api';
 
 export type WriteNikkiModalProps = {
-    open: boolean,
-    onClose: Function,
+    isOpen: boolean,
+    closeModal: Function,
 }
 
 // Modal with pure css
@@ -31,9 +32,9 @@ export type WriteNikkiModalProps = {
 // }
 // ```
 
-export default function WriteNikkiModal({ open, onClose }: WriteNikkiModalProps) {
+export default function WriteNikkiModal({ isOpen, closeModal }: WriteNikkiModalProps) {
 
-    const display = open ? "block" : "hidden";
+    const display = isOpen ? "block" : "hidden";
 
     const backgroundStyle = `${display} fixed z-1 left-0 top-0 w-full h-full overflow-auto flex`
     const contentStyle = `border-disable p-3 m-auto bg-gray-100 w-1/2 border-black border-2`
@@ -44,6 +45,10 @@ export default function WriteNikkiModal({ open, onClose }: WriteNikkiModalProps)
     bg-gray-50 hover:bg-gray-200
     text-gray-500 text-sm font-medium select-none`;
 
+    const [text, setText] = useState("");
+    const saveNikki = () => client.post("/api/nikki", { "content": text });
+
+
     return (
         <div className={backgroundStyle}>
             <div className={contentStyle}>
@@ -52,14 +57,14 @@ export default function WriteNikkiModal({ open, onClose }: WriteNikkiModalProps)
                 <div className="h-5" />
 
                 <div className="justify-center flex">
-                    <textarea className="w-4/5 outline-none" />
+                    <textarea className="w-4/5 outline-none" value={text} onChange={(e) => setText(e.target.value)} />
                 </div>
                 <div className="h-5" />
 
                 <div className="justify-center flex">
-                    <button className={btnStyle}>ADD</button>
+                    <button className={btnStyle} onClick={(_) => { saveNikki(); setText(""); closeModal(); }}>ADD</button>
                     <div className="w-3" />
-                    <button className={btnStyle} onClick={(_) => onClose()}>CLOSE</button>
+                    <button className={btnStyle} onClick={(_) => { closeModal(); setText(""); }}>CLOSE</button>
                 </div>
             </div>
         </div>

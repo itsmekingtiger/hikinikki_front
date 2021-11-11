@@ -38,9 +38,9 @@ function App() {
     }
   }
 
-  const [showModal, setShowMoal] = useState(false);
+  const [isModalOpen, setShowMoal] = useState(false);
   useHotkeys('alt+n', () => setShowMoal(true));
-  const onClose = () => setShowMoal(false)
+  const closeModal = () => setShowMoal(false)
 
   return (
     <div className="App">
@@ -50,7 +50,7 @@ function App() {
 
       <Footer currentPage={pageInfo.current} totalPage={pageInfo.total} onPageChanged={onPageChanged} />
 
-      <WriteNikkiModal open={showModal} onClose={onClose} />
+      <WriteNikkiModal isOpen={isModalOpen} closeModal={closeModal} />
     </div>
   );
 }
