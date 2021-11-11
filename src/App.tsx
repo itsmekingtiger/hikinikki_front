@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import client from './api/nikki_api';
 import BodySection from './components/BodySection';
@@ -38,9 +38,11 @@ function App() {
     }
   }
 
+  const inputRef = useRef<any>();
   const [isModalOpen, setShowMoal] = useState(false);
-  useHotkeys('alt+n', () => setShowMoal(true));
+  useHotkeys('alt+n', () => { setShowMoal(true); inputRef.current.focus(); });
   const closeModal = () => setShowMoal(false);
+
 
   return (
     <div className="App">
@@ -50,7 +52,7 @@ function App() {
 
       <Footer currentPage={pageInfo.current} totalPage={pageInfo.total} onPageChanged={onPageChanged} />
 
-      <WriteNikkiModal isOpen={isModalOpen} closeModal={closeModal} />
+      <WriteNikkiModal isOpen={isModalOpen} closeModal={closeModal} focusRef={inputRef} />
     </div>
   );
 }

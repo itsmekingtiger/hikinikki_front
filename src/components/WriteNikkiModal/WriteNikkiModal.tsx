@@ -5,6 +5,7 @@ import client from '../../api/nikki_api';
 export type WriteNikkiModalProps = {
     isOpen: boolean,
     closeModal: Function,
+    focusRef: any,
 }
 
 // Modal with pure css
@@ -33,7 +34,7 @@ export type WriteNikkiModalProps = {
 // }
 // ```
 
-export default function WriteNikkiModal({ isOpen, closeModal }: WriteNikkiModalProps) {
+export default function WriteNikkiModal({ isOpen, closeModal, focusRef }: WriteNikkiModalProps) {
 
     const display = isOpen ? "block" : "hidden";
 
@@ -60,7 +61,7 @@ export default function WriteNikkiModal({ isOpen, closeModal }: WriteNikkiModalP
                 <div className="h-5" />
 
                 <div className="justify-center flex">
-                    <textarea className="w-4/5 outline-none" value={text} onChange={(e) => setText(e.target.value)} />
+                    <textarea ref={focusRef} className="w-4/5 outline-none" value={text} onChange={(e) => setText(e.target.value)} />
                 </div>
                 <div className="h-5" />
 
