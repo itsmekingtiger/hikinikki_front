@@ -50,8 +50,7 @@ export default function WriteNikkiModal({ isOpen, closeModal, focusRef }: WriteN
     const [text, setText] = useState("");
 
     async function saveNikki() {
-        if (document.activeElement === focusRef.current && text)
-            client.post("/api/nikki", { "content": text });
+        if (text) client.post("/api/nikki", { "content": text });
     }
 
     useHotkeys('esc', () => { setText(""); closeModal() });
