@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import client from './api/nikki_api';
 import BodySection from './components/BodySection';
+import FloatingActionButton from './components/FloatingActionButton/FloatingActionButton';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import WriteNikkiModal from './components/WriteNikkiModal/WriteNikkiModal';
@@ -63,6 +64,8 @@ function App() {
       <Footer currentPage={pageInfo.current} totalPage={pageInfo.total} onPageChanged={onPageChanged} />
 
       <WriteNikkiModal isOpen={isModalOpen} closeModal={closeModal} focusRef={inputRef} />
+
+      <FloatingActionButton onClick={() => setShowMoal(true)} />
     </div>
   );
 }
