@@ -39,7 +39,7 @@ export default function WriteNikkiModal({ isOpen, closeModal, focusRef }: WriteN
     const display = isOpen ? "block" : "hidden";
 
     const backgroundStyle = `${display} fixed z-1 left-0 top-0 w-full h-full overflow-auto flex`
-    const contentStyle = `border-disable p-3 m-auto bg-gray-100 w-1/2 border-black border-2`
+    const contentStyle = `border-disable p-3 m-auto bg-gray-100 w-4/5 md:w-1/2 border-black border-2`
 
     const btnStyle = `
     relative inline-flex items-center px-4 py-2
