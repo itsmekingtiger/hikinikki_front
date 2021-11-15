@@ -11,6 +11,7 @@ function App() {
 
   const [nikkis, setNikkis] = useState<Array<Nikki>>([]);
   const [pageInfo, setPageInfo] = useState<{ current: number, total: number }>({ current: 0, total: 0 });
+  let rawSock: WebSocket;
 
   useEffect(
     () => {
@@ -21,6 +22,15 @@ function App() {
           setPageInfo({ current: data.currentPage, total: data.totalPage });
         }
       );
+
+      // init raw websocket api
+      if (!rawSock || rawSock.CLOSED) {
+        rawSock = new WebSocket("ws://192.168.0.52:8080/ws/nnn");
+        rawSock.onmessage = (e: MessageEvent<any>) => {
+          const new_nikki: Nikki = JSON.parse(e.data);
+          setNikkis(old_nikki => [new_nikki, ...old_nikki]);
+        }
+      }
     },
     []
   );
