@@ -26,7 +26,7 @@ function App() {
 
       // init raw websocket api
       if (!rawSock || rawSock.CLOSED) {
-        rawSock = new WebSocket("ws://192.168.0.52:8080/ws/nnn");
+        rawSock = new WebSocket(`ws://${window.location.host}/ws/nnn`);
         rawSock.onmessage = (e: MessageEvent<any>) => {
           const new_nikki: Nikki = JSON.parse(e.data);
           setNikkis(old_nikki => [new_nikki, ...old_nikki]);
