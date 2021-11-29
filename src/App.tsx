@@ -24,18 +24,38 @@ function App() {
         }
       );
 
-      // init raw websocket api
-      if (!rawSock || rawSock.CLOSED) {
-        rawSock = new WebSocket(`ws://${window.location.host}/ws/nnn`);
-        rawSock.onmessage = (e: MessageEvent<any>) => {
-          const new_nikki: Nikki = JSON.parse(e.data);
-          setNikkis(old_nikki => [new_nikki, ...old_nikki]);
-        }
-      }
+      startNNNService();
     },
     []
   );
 
+  function startNNNService() {
+    _connectWebsocket();
+    _reconnectWebsocket();
+  }
+
+  function _connectWebsocket() {
+    try {
+      rawSock = new WebSocket(`ws://${window.location.host}/ws/nnn`);
+      rawSock.onmessage = (e: MessageEvent<any>) => {
+        const new_nikki: Nikki = JSON.parse(e.data);
+        setNikkis(old_nikki => [new_nikki, ...old_nikki]);
+      };
+      rawSock.onerror = (e) => console.error(`error on ws: ${e}`);
+      rawSock.onclose = () => console.log("ws closed");
+      console.log(`success to connect ws`);
+    } catch (error) {
+      console.warn(`failed to connect ws: ${error}`);
+    }
+
+  }
+
+  function _reconnectWebsocket() {
+    setInterval(
+      () => (rawSock.readyState === rawSock.CLOSED) && _connectWebsocket,
+      5000,
+    );
+  }
   async function onPageChanged(page: number) {
     const resp = await client.get<NikkiPageData>(
       "/api/nikki/recent",
