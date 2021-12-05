@@ -31,7 +31,6 @@ function App() {
 
   function startNNNService() {
     _connectWebsocket();
-    _reconnectWebsocket();
   }
 
   function _connectWebsocket() {
@@ -42,20 +41,16 @@ function App() {
         setNikkis(old_nikki => [new_nikki, ...old_nikki]);
       };
       rawSock.onerror = (e) => console.error(`error on ws: ${e}`);
-      rawSock.onclose = () => console.log("ws closed");
+      rawSock.onclose = () => {
+        console.log("ws closed");
+        setTimeout(_connectWebsocket, 1000);
+      }
       console.log(`success to connect ws`);
     } catch (error) {
       console.warn(`failed to connect ws: ${error}`);
     }
-
   }
 
-  function _reconnectWebsocket() {
-    setInterval(
-      () => (rawSock.readyState === rawSock.CLOSED) && _connectWebsocket,
-      5000,
-    );
-  }
   async function onPageChanged(page: number) {
     const resp = await client.get<NikkiPageData>(
       "/api/nikki/recent",
